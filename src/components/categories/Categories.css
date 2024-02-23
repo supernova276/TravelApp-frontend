@@ -1,0 +1,18 @@
+.category-container{
+
+    padding: 6rem 5rem 1rem 4rem;
+    background-color:var(--background-colour);
+    position:fixed;
+    z-index:1;
+    width:100%;
+}
+.arrow{
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+.category:hover{
+border-bottom: 1px solid var(--text-colour-primary);
+}
+.category-underline{
+    border-bottom: 1px solid var(--text-colour-primary);
+}

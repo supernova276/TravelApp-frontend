@@ -1,0 +1,56 @@
+
+#brand-heading{
+
+    font-family:"Poppins",sans-serif;
+    font-size:1.75rem;
+    color:var(--primary-colour);
+    font-weight:600;
+}
+.search-btn{
+    border:none;
+    background-color:var(--primary-colour);
+    height: 100%;
+}
+.search-icon{
+    color:var(--background-colour);
+    font-weight:bold;
+    padding:1rem;
+    
+}
+.heading-2{
+    padding:0.5rem;
+    font-size:1.5rem
+}
+.slider-icon{
+    padding:0.5rem;
+    font-size:1.50rem;
+    cursor:pointer;
+    color:var(--container-border-colour)
+}
+.user-icon{
+    padding:0.5rem;
+    font-size:1.50rem;
+    cursor: pointer;
+    color:var(--container-border-colour);
+    background:var(--accent-colour)
+}
+.form-container{
+    background-color: #ffff;
+    height: 2.75rem;
+    border-radius:4px;
+}
+.form-option{
+
+font-size:0.875rem;
+padding: 8px;
+color:var(--text-color-primary)
+
+}
+.border-right-1px{
+    border-right:1px solid var(--accent-colour);
+    height: 70%;
+}
+input{
+    width:15rem;
+    height:2.3rem;
+}
