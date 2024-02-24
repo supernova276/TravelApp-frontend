@@ -6,9 +6,12 @@ import { getHotels } from '../../api/hotels'
 import Loader from '../../components/common/Loader/Loader'
 import Categories from '../../components/categories/Categories'
 import { useCategory } from "../../context/categories"
+import { useSelector } from 'react-redux'
+import SearchStayWithDate from '../../components/SearchStayWithDate/SearchStayWithDate'
 
 const  LandingPage = () => {
 
+  const isModalOpen=useSelector(state=>state.search.isModalOpen)
 
   const {hotelCategory}=useCategory()
   const[hotels,setHotels]=useState([])
@@ -61,7 +64,7 @@ try{
   },[hotelCategory])
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
         <NavbarComponent/>
         <Categories/>
        { 
@@ -79,6 +82,7 @@ try{
         </InfiniteScroll>):
         (<></>)
         }
+        {isModalOpen && <SearchStayWithDate/>}
     
     </div>
   )

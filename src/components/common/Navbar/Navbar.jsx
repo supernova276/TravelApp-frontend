@@ -2,9 +2,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { useSelector,useDispatch} from "react-redux"
 import './Navbar.css'
+import { useState } from 'react';
+import {setSearchModal} from '../../../actions/search.actions'
 
 function NavbarComponent() {
+
+ const dispatch=useDispatch()
+
+  const handleSearch=()=>{
+      dispatch(setSearchModal())
+  }
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{position:"fixed", zIndex:"2", width:"100%"}}>
     <Container>
@@ -13,7 +22,7 @@ function NavbarComponent() {
         <Nav className=" d-flex justify-content-between"  style={{width:"100%"}} >
           
       <div id="brand-heading">EzeeTravel</div>
-      <div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow'>
+      <div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow' onClick={handleSearch}>
 
         <span className='form-option'> Any Where </span>
         <span className='border-right-1px'></span>

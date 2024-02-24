@@ -1,0 +1,14 @@
+.heading{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+.sub-heading{
+    font-size: 1.1rem;
+}
+hr{
+    width:60%
+}
+.list{
+    column-count: 2;
+    column-gap:0rem;
+}
