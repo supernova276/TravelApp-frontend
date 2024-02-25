@@ -1,12 +1,19 @@
+import { useNavigate } from "react-router"
 
 
 const HotelCard = ({hotel}) => {
 
   const { _id,name,image,address,state,rating,price}=hotel
+  const navigate=useNavigate()
 
+  const handleHotelCardClick=()=>{
+
+   navigate(`/hotels/${name}/${state}/${address}/${_id}`)
+
+  }
 
   return (
-<div className="card shadow" style={{width:"22rem", position:"relative"}}>
+<div className="card shadow" style={{width:"22rem", position:"relative"}} onClick={handleHotelCardClick}>
   <div style={{height:"10rem"}}>
   <img className="card-img-top" style={{height:"100%"}} src={image} alt="Card image cap"/>
   </div>

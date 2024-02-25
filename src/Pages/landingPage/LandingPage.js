@@ -2,66 +2,53 @@ import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import NavbarComponent from '../../components/common/Navbar/Navbar'
 import HotelCard from '../../components/HotelCard/HotelCard'
-import { getHotels } from '../../api/hotels'
+import { getHotels } from '../../actions/service.actions'
 import Loader from '../../components/common/Loader/Loader'
 import Categories from '../../components/categories/Categories'
 import { useCategory } from "../../context/categories"
+import { useDispatch, useSelector } from 'react-redux'
+import SearchStayWithDate from '../../components/SearchStayWithDate/SearchStayWithDate'
 
 const  LandingPage = () => {
 
 
+  const isModalOpen=useSelector(state=>state.search.isModalOpen)
+
   const {hotelCategory}=useCategory()
-  const[hotels,setHotels]=useState([])
   const[currIndx,setCurrIndx]=useState(16)
   const [hasMore,setHasMore]=useState(true)
-  const[testData,setTestData]=useState([])
+  const data=useSelector(state=>state.service.hotelByCategory)
+  const hotels=useSelector(state=>state.service.first16Hotels)
+  const dispatch=useDispatch()
 
   const fetchMore=()=>{
 
-    console.log(hasMore)
-    if(hotels.length>=testData.length){
+    if(hotels.length>=data.length){
       setHasMore(false);
       return;
     }
     else{
       //testdata.lenght>hotels.length
 
-      setTimeout(()=>{
+      // setTimeout(()=>{
 
     if(hotels && hotels.length>0)
-    {  setHotels(hotels.concat(testData.slice(currIndx,currIndx+16)))
+    {  hotels.concat(data.slice(currIndx,currIndx+16))
       setCurrIndx(prev=>prev+16)
     }
     else{
-      setHotels([])
+      hotels=[]
     }
-    },1000)
+    // },1000)
     }
   }
-
-  const init=async(hotelCategory)=>{
-try{
-    const {data}=await getHotels(hotelCategory)
-
-    setTestData(data)
-    console.log(data)
-  
-    setHotels(data? data.slice(0,16):[])
-
-  }
-  catch(err){
-    console.log(err)
-  }
-  }
-
   useEffect(()=>{
     
-    init(hotelCategory)
-
+    dispatch(getHotels(hotelCategory))
   },[hotelCategory])
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
         <NavbarComponent/>
         <Categories/>
        { 
@@ -79,6 +66,7 @@ try{
         </InfiniteScroll>):
         (<></>)
         }
+        {isModalOpen && <SearchStayWithDate/>}
     
     </div>
   )

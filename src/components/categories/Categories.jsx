@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { getCategories } from '../../api/hotels'
+import { getCategories } from '../../actions/service.actions'
 import  './Categories.css'
 import { useCategory } from '../../context/categories'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Categories = () => {
 
+    const dispatch=useDispatch()
     const{hotelCategory,setHotelCategory}=useCategory()
-    const[categories,setCategories]=useState([])
+
+    const categories=useSelector(state=>state.service.categories)
     const[numberOfCategoriesToShow,setNumberOfCategoriesToShow]=useState(0)
 
     useEffect(()=>{
-    
-      ( async()=>{
-
-       try{ 
-        const {data}=await getCategories()
-       const categoriesToShow=data.slice(numberOfCategoriesToShow,numberOfCategoriesToShow+10)
-       setCategories(categoriesToShow)
-}
-catch(err){
-    console.log(err)
-}
-      })();
+      
+       dispatch(getCategories())
    
     },[numberOfCategoriesToShow])
 
