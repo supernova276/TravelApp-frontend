@@ -10,6 +10,10 @@ import {setSearchModal} from '../../../actions/search.actions'
 function NavbarComponent() {
 
  const dispatch=useDispatch()
+ const geusts=useSelector(state=>state.search.geusts)
+ const destination=useSelector(state=>state.search.destination)
+ const checkinDate=useSelector(state=>state.search.checkInDate)
+ const checkoutDate=useSelector(state=>state.search.checkOutDate)
 
   const handleSearch=()=>{
       dispatch(setSearchModal())
@@ -22,15 +26,30 @@ function NavbarComponent() {
         <Nav className=" d-flex justify-content-between"  style={{width:"100%"}} >
           
       <div id="brand-heading">EzeeTravel</div>
+      { 
       <div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow' onClick={handleSearch}>
 
-        <span className='form-option'> Any Where </span>
-        <span className='border-right-1px'></span>
-        <span className='form-option'> Any Week </span>
-        <span className='border-right-1px'></span>
-        <span className='form-option'>Add Geusts</span>
-        <button className="search-btn"><i className="bi bi-search search-icon"></i></button>
-      </div>
+      <span className='form-option'> {destination || "Any Where" } </span>
+      <span className='border-right-1px'></span>
+      <span className='form-option'> 
+      {checkinDate && checkoutDate  ?`${checkinDate.toLocaleString("en-US",{ day:"numeric",month:"short"})}-
+      ${checkinDate.toLocaleString("en-US",{ day:"numeric",month:"short"})}`:"Any Week"
+      } 
+      </span>
+      <span className='border-right-1px'></span>
+      <span className='form-option'>{geusts>0?geusts:"geusts"}</span>
+      <button className="search-btn"><i className="bi bi-search search-icon"></i></button>
+    </div>
+      // :<div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow' onClick={handleSearch}>
+
+      //   <span className='form-option'> Any Where </span>
+      //   <span className='border-right-1px'></span>
+      //   <span className='form-option'> Any Week </span>
+      //   <span className='border-right-1px'></span>
+      //   <span className='form-option'>Add Geusts</span>
+      //   <button className="search-btn"><i className="bi bi-search search-icon"></i></button>
+      // </div>
+      }
       <div>
         <span className="heading-2">hello, akshita</span>
         <span style={{paddingLeft:"2rem"}}>

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import DateSelector from '../DateSelector/DateSelector'
 import './SearchStayWithDate.css'
 import { useDispatch, useSelector } from 'react-redux'
-import {setDestination,setGeusts,setShowSearchResult} from '../../actions/search.actions'
-import {getHotels} from '../../api/hotels'
+import {setDestination,setGeusts,setShowSearchResult,closeSearchModal} from '../../actions/search.actions'
+import {getHotels} from '../../actions/service.actions'
 import { useCategory } from '../../context/categories'
+import { useNavigate } from 'react-router-dom'
 
 const SearchStayWithDate = () => {
 
@@ -12,21 +13,14 @@ const SearchStayWithDate = () => {
     const destination=useSelector(state=>state.search.destination)
     const geusts=useSelector(state=>state.search.geusts)
     const isSearchResultOpen=useSelector(state=>state.search.isSearchResultOpen)
+    const hotels=useSelector(state=>state.service.hotelByCategory)
     
-    const[hotels,setHotels]=useState([])
+    // const[hotels,setHotels]=useState([])
     const {hotelCategory}=useCategory()
+    const navigate=useNavigate()
+
     useEffect(()=>{
-     
-      (async()=> { try{
-            const {data}=await getHotels(hotelCategory)
-        
-            setHotels(data)
-            console.log(data)
-        
-          }
-          catch(err){
-            console.log(err)
-          }})()
+      getHotels(hotelCategory)
     },[])
 
     const debounce=(callback,delay)=>{
@@ -59,6 +53,11 @@ const SearchStayWithDate = () => {
      dispatch(setShowSearchResult())
    }
 
+   const handleSearchButtonClick=()=>{
+    dispatch(closeSearchModal())
+    navigate(`hotels/${destination}`)
+   }
+
     const debouncedDestinationChange=debounce(handleDestinationOnChange,500)
     const debouncedGeustChange=debounce(handleGeustChange,500)
 
@@ -73,7 +72,7 @@ const SearchStayWithDate = () => {
             <div className='location-container'>
                 <label className="label">Where</label>
                 <input autoFocus onFocus={handleDestinationFocus} placeholder='search destination'
-                 className="input search-dest" onChange={debouncedDestinationChange} value={destination||''}/>
+                 className="input search-dest" onChange={debouncedDestinationChange}/>
             </div>
             <div className="location-container">
                 <label className="label">Check in</label>
@@ -87,7 +86,7 @@ const SearchStayWithDate = () => {
                 <label className="label">No of geusts</label>
                 <input value={geusts} placeholder='Add Geusts' className="input search-dest" onChange={handleGeustChange}/>
             </div>
-            <div className='search-container d-flex align-items-center'>
+            <div className='search-container d-flex align-items-center'onClick={handleSearchButtonClick}>
                 <span className='material-symbols-outlined'>search</span>
                 <span>Searching</span>
             </div>

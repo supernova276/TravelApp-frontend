@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import './HotelDetails.css'
+import { useSelector } from 'react-redux'
 
-const HotelDetails = ({singleHotel}) => {
-    console.log(singleHotel)
+const HotelDetails = () => {
+
+const singleHotel=useSelector(state=>state.service.hotelById)
+
 
     const[display,setDisplay]=useState(false)
 

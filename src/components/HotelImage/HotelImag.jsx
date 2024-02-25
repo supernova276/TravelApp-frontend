@@ -1,7 +1,9 @@
 import React from 'react'
 import './HotelImage.css'
+import { useSelector } from 'react-redux'
 
-const HotelImag = ({singleHotel}) => {
+const HotelImag = () => {
+  const singleHotel=useSelector(state=>state.service.hotelById)
 
 const{image,imageArr}=singleHotel
 

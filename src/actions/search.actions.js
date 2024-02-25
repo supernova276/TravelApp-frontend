@@ -49,3 +49,10 @@ export const setShowSearchResult=()=>{
         })
     }
 }
+export const closeSearchModal=()=>{
+    return(dispatch)=>{
+        dispatch({
+            type:"CLOSE_SEARCH_MODAL"
+        })
+    }
+}

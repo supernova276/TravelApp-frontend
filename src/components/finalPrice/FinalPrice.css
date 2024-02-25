@@ -35,3 +35,9 @@
 .reserve-hr{
     width:100%
 }
+.geust-count-input{
+    border:none;
+}
+.geust-count-input:focus{
+    outline: none;
+}

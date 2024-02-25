@@ -53,6 +53,13 @@ export const searchReducer=(state=initalState,action)=>{
                 isSearchResultOpen:true
             }
 
+        case "CLOSE_SEARCH_MODAL":
+            return{
+                ...state,
+                isModalOpen:!state.isModalOpen
+
+            }
+
             default: return state;
 
     }

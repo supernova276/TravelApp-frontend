@@ -1,7 +1,18 @@
 import React from 'react'
 import "./FinalPrice.css"
+import { useDispatch, useSelector } from 'react-redux'
+import DateSelector from '../DateSelector/DateSelector'
+import { setGeusts } from '../../actions/search.actions'
 
-const FinalPrice = ({singleHotel}) => {
+const FinalPrice = () => {
+
+    const singleHotel=useSelector(state=>state.service.hotelById)
+    const geusts=useSelector(state=>state.search.geusts)
+    const dispatch=useDispatch()
+
+    const handleGeustChange=(e)=>{
+         dispatch(setGeusts(e.target.value))
+    }
 
     const{price,rating}=singleHotel
   return (
@@ -14,19 +25,22 @@ const FinalPrice = ({singleHotel}) => {
             <span className='material-symbols-outlined'>star</span>\<span>{rating}</span>
             </span>
         </div>
-        <div className='d-flex flex-column'>
-            <div className='d-flex justify-content-around gap-sm'>
+        <div className='d-flex flex-row'>
                 <div className='checkin loc-container'>
-                    <label>check in</label>
+                    <label className='label'>check in</label>
+                    <DateSelector type="in"/>
                 </div>
                 <div className='checkin loc-container'>
-                    <label>check Out</label>
+                    <label className='label'>check Out</label>
+                    <DateSelector type="out"/>
                 </div>
-            </div>
         </div>
         <div className='d-flex flex-column  geusts gutter-sm'>
                 <p>GEUSTS</p>
-                <span>2 geusts</span>
+                {
+                    geusts<=0?(<input className='geust-count-input' placeholder='Add Geusts'value={geusts} type="number" onChange={handleGeustChange}/>):
+                    <span>{geusts} geusts</span>
+                }
         </div>
 
         <div className='d-flex justify-content-center'>
