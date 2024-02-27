@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-
+import './HotelCard.css'
 
 const HotelCard = ({hotel}) => {
 
@@ -17,7 +17,7 @@ const HotelCard = ({hotel}) => {
   <div style={{height:"10rem"}}>
   <img className="card-img-top" style={{height:"100%"}} src={image} alt="Card image cap"/>
   </div>
-  <span style={{position:"absolute",top:"2rem",right:"2rem"}}><i className="bi bi-heart-fill" style={{fontSize:"1.5rem",color:"#dc2626"}}></i></span>
+  <span style={{position:"absolute",top:"2rem",right:"2rem"}}><i className=" heart bi bi-heart-fill"></i></span>
   <div className="card-body p-sm-3">
     <div className="d-flex justify-content-between mb-sm-1" style={{color:"#363030"}}>
     <h5 className="card-title">{address},{state}</h5>
