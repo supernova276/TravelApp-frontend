@@ -2,6 +2,7 @@ const initalState={
     hotelByCategory:[],
     first16Hotels:[],
     categories:[],
+    TenCategories:[],
     hotelById:[]
 
 }
@@ -21,6 +22,12 @@ export const serviceReducer=(state=initalState,action)=>{
                 ...state,
                 first16Hotels:payload
 
+            }
+
+        case "GET_FIRST_10_CATEGORIES":
+            return{
+                ...state,
+                TenCategories:payload
             }
 
         case "GET_CATEGORIES":

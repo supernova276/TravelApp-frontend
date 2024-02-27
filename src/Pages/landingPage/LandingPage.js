@@ -8,17 +8,28 @@ import Categories from '../../components/categories/Categories'
 import { useCategory } from "../../context/categories"
 import { useDispatch, useSelector } from 'react-redux'
 import SearchStayWithDate from '../../components/SearchStayWithDate/SearchStayWithDate'
+import {getHotelsByRoomsAndBeds} from '../../utils/rooms-beds'
+import { getHotelsByPropertyType } from '../../utils/property-type'
+import { getHotelsByRatings } from '../../utils/ratings'
+import {getHotelsByCancelation} from '../../utils/hotels-cancel'
 
 const  LandingPage = () => {
 
 
   const isModalOpen=useSelector(state=>state.search.isModalOpen)
+  const priceRange=useSelector(state=>state.filter.priceRange)
 
   const {hotelCategory}=useCategory()
   const[currIndx,setCurrIndx]=useState(16)
   const [hasMore,setHasMore]=useState(true)
   const data=useSelector(state=>state.service.hotelByCategory)
   const hotels=useSelector(state=>state.service.first16Hotels)
+  const numberOfBathrooms=useSelector(state=>state.filter.numberOfBathrooms)
+  const numberOfBeds=useSelector(state=>state.filter.numberOfBeds)
+  const numberOfRooms=useSelector(state=>state.filter.numberOfRooms)
+  const propType=useSelector(state=>state.filter.PropertyType)
+  const rating=useSelector(state=>state.filter.rating)
+  const isCancelable=useSelector(state=>state.filter.isCancelable)
   const dispatch=useDispatch()
 
   const fetchMore=()=>{
@@ -47,6 +58,14 @@ const  LandingPage = () => {
     dispatch(getHotels(hotelCategory))
   },[hotelCategory])
 
+  const filteredData=data .filter((hotel)=> hotel.price>=priceRange[0] && hotel.price<=priceRange[1])
+  const filteredAmeneties=getHotelsByRoomsAndBeds(filteredData,numberOfBathrooms,numberOfBeds,numberOfRooms)
+  const filteredByPropType=getHotelsByPropertyType(filteredAmeneties,propType)
+  const filteredByRatings=getHotelsByRatings(filteredByPropType,rating)
+  console.log(isCancelable)
+  const filteredByCancelation=getHotelsByCancelation(filteredByRatings,isCancelable)
+  
+
   return (
     <div style={{position:"relative"}}>
         <NavbarComponent/>
@@ -61,7 +80,7 @@ const  LandingPage = () => {
         endMessage={<p>you have reached the end!</p>}
         >
         <main style={{padding:"10rem 5rem 3rem 4rem",gap:"5rem"}} className='d-flex flex-wrap'>
-        {hotels && hotels.map((hotel)=> <HotelCard  key={hotel._id} hotel={hotel}/>)}
+        {filteredByCancelation && filteredByCancelation.map((hotel)=> <HotelCard  key={hotel._id} hotel={hotel}/>)}
         </main>
         </InfiniteScroll>):
         (<></>)

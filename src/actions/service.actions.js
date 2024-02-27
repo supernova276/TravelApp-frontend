@@ -39,6 +39,11 @@ export const getCategories = () => {
                 type: "GET_CATEGORIES",
                 payload: data
             })
+
+            dispatch({
+                type:"GET_FIRST_10_CATEGORIES",
+                payload: data?data.slice(0,10):[]
+            })
         }
         catch (err) {
             console.log(err)

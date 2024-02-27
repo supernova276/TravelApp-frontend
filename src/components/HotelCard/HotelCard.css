@@ -2,3 +2,11 @@
     height: 15rem;
     
 }
+.heart{
+    font-size: 1.5rem;
+    color:var(--container-border-colour)
+}
+.heart:hover{
+    color:#dc2626;
+
+}
