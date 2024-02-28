@@ -72,7 +72,7 @@ const SearchStayWithDate = () => {
             <div className='location-container'>
                 <label className="label">Where</label>
                 <input autoFocus onFocus={handleDestinationFocus} placeholder='search destination'
-                 className="input search-dest" onChange={debouncedDestinationChange}/>
+                 className="input search-dest"  defaultValue={destination }onChange={debouncedDestinationChange}/>
             </div>
             <div className="location-container">
                 <label className="label">Check in</label>
@@ -84,7 +84,7 @@ const SearchStayWithDate = () => {
             </div>
             <div className='location-container'>
                 <label className="label">No of geusts</label>
-                <input value={geusts} placeholder='Add Geusts' className="input search-dest" onChange={handleGeustChange}/>
+                <input defaultValue={geusts} placeholder='Add Geusts' className="input search-dest" onChange={handleGeustChange}/>
             </div>
             <div className='search-container d-flex align-items-center'onClick={handleSearchButtonClick}>
                 <span className='material-symbols-outlined'>search</span>
