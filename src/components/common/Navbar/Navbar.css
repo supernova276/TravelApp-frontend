@@ -25,14 +25,20 @@
     padding:0.5rem;
     font-size:1.50rem;
     cursor:pointer;
-    color:var(--container-border-colour)
+    color:var(--container-border-colour);
+    border:1px solid #000;
 }
 .user-icon{
     padding:0.5rem;
     font-size:1.50rem;
     cursor: pointer;
     color:var(--container-border-colour);
-    background:var(--accent-colour)
+    background:var(--accent-colour);
+    border:1px solid #000;
+}
+
+.user-icon:hover,.slider-icon:hover{
+    background-color: var(--overlay)
 }
 .form-container{
     background-color: #ffff;

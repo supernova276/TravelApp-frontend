@@ -18,7 +18,7 @@ const FreeCancel = () => {
                     <input type="checkbox" id="slider-checkbox" onChange={handleCancelChange} 
                     value={isCancelable}
                     checked={isCancelable}/>
-                        <label for="slider-checkbox" className="slider-label"></label>
+                        <label htmlFor="slider-checkbox" className="slider-label"></label>
                 </label>
             </div>
 

@@ -6,6 +6,7 @@ import { useSelector,useDispatch} from "react-redux"
 import './Navbar.css'
 import { useState } from 'react';
 import {setSearchModal} from '../../../actions/search.actions'
+import {setAuthModal} from '../../../actions/auth.actions'
 
 function NavbarComponent() {
 
@@ -14,9 +15,14 @@ function NavbarComponent() {
  const destination=useSelector(state=>state.search.destination)
  const checkinDate=useSelector(state=>state.search.checkInDate)
  const checkoutDate=useSelector(state=>state.search.checkOutDate)
+//  const isModalOpen=useSelector(state=>state.auth.isAuthModalOpen)
 
   const handleSearch=()=>{
       dispatch(setSearchModal())
+  }
+
+  const handleAuthClick=()=>{
+    dispatch(setAuthModal())
   }
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{position:"fixed", zIndex:"2", width:"100%"}}>
@@ -52,7 +58,7 @@ function NavbarComponent() {
       }
       <div>
         <span className="heading-2">hello, akshita</span>
-        <span style={{paddingLeft:"2rem"}}>
+        <span className='nav-login' style={{paddingLeft:"2rem"}}onClick={handleAuthClick}>
         <i className="bi bi-sliders slider-icon"></i>
         <i className="bi bi-person-circle user-icon"></i>
         </span>
