@@ -14,8 +14,6 @@ export const signupHandler= (number, name, email, password, confirmPassword) => 
          isValidPassword = validatePassword(password);
          isValidNumber = validateNumber(number);
          isValidConfirmPass = validatePassword(confirmPassword);
-       
-        console.log(isValidPassword,isValidNumber,isValidConfirmPass,isValidName)
 
         if (isValidEmail && isValidName && isValidNumber && isValidPassword && isValidConfirmPass) {
             try {
@@ -23,7 +21,7 @@ export const signupHandler= (number, name, email, password, confirmPassword) => 
             const SLUG = `/travelApp/api/v1/signup`
             const URL = BASE_URL + SLUG
 
-                const { data: { accessToken }, status } = await axios.post(URL, {
+                const { data: { accesstoken }, status } = await axios.post(URL, {
                     name: name,
                     password: password,
                     email: email,
@@ -32,7 +30,16 @@ export const signupHandler= (number, name, email, password, confirmPassword) => 
                 });
 
                 if (status === 200) {
-                    localStorage.setItem('accessToken', accessToken);
+                    // localStorage.setItem('accessToken', accessToken);
+                    dispatch({
+                        type:"SET_TOKEN",
+                        payload:accesstoken
+                    })
+
+                    dispatch({
+                        type:"SET_NAME",
+                        payload:name
+                    })
                 }
             } catch (err) {
                 alert('Please check the credentials, the user might already exist');
@@ -64,8 +71,13 @@ export const LoginHandler=(number,password)=>{
                });
 
                if (status === 200) {
-                    console.log(accesstoken)
-                   localStorage.setItem('accessToken', accesstoken)
+                   
+                //    localStorage.setItem('accessToken', accesstoken)
+                dispatch({
+                    type:"SET_TOKEN",
+                    payload:accesstoken
+                })
+
                    return accesstoken
                }
            } catch (err) {

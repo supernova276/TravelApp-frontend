@@ -6,7 +6,8 @@ const initalState={
     email:"",
     password:"",
     confirmPassword:"",
-    selectedTab:"login"
+    selectedTab:"login",
+    token:""
 
 }
 
@@ -69,6 +70,12 @@ export const authReducer=(state=initalState,action)=>{
                 password: "",
                     
                 }
+
+        case "SET_TOKEN":
+            return{
+                ...state,
+                token:payload
+            }
 
         default:return state
     }

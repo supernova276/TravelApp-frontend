@@ -4,9 +4,15 @@
 }
 .heart{
     font-size: 1.5rem;
-    color:var(--container-border-colour)
+    color:var(--container-border-colour);
 }
-.heart:hover{
+.bi-heart-fill{
+    font-size:1.7rem;
+}
+.bi-heart-fill:hover{
     color:#dc2626;
 
+}
+.heart{
+    color:#dc2626;
 }
