@@ -15,6 +15,7 @@ function NavbarComponent() {
  const destination=useSelector(state=>state.search.destination)
  const checkinDate=useSelector(state=>state.search.checkInDate)
  const checkoutDate=useSelector(state=>state.search.checkOutDate)
+ const name=useSelector(state=>state.search.name)
 //  const isModalOpen=useSelector(state=>state.auth.isAuthModalOpen)
 
   const handleSearch=()=>{
@@ -46,24 +47,14 @@ function NavbarComponent() {
       <span className='form-option'>{geusts>0?geusts:"geusts"}</span>
       <button className="search-btn"><i className="bi bi-search search-icon"></i></button>
     </div>
-      // :<div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow' onClick={handleSearch}>
-
-      //   <span className='form-option'> Any Where </span>
-      //   <span className='border-right-1px'></span>
-      //   <span className='form-option'> Any Week </span>
-      //   <span className='border-right-1px'></span>
-      //   <span className='form-option'>Add Geusts</span>
-      //   <button className="search-btn"><i className="bi bi-search search-icon"></i></button>
-      // </div>
       }
       <div>
-        <span className="heading-2">hello, akshita</span>
+        <span className="heading-2">{name? `Hello ${name}`:`Hello User`}</span>
         <span className='nav-login' style={{paddingLeft:"2rem"}}onClick={handleAuthClick}>
         <i className="bi bi-sliders slider-icon"></i>
         <i className="bi bi-person-circle user-icon"></i>
         </span>
       </div>
-
         </Nav>
       </Navbar.Collapse>
     </Container>

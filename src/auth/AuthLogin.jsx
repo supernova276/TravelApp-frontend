@@ -13,7 +13,6 @@ const AuthSignup = () => {
     const dispatch=useDispatch()
 
     const  number=useSelector(state=>state.auth.number)
-    console.log("value of number is",number)
     const password=useSelector(state=>state.auth.password)
 
     const handleMobileNumber=(e)=>{
@@ -30,12 +29,20 @@ const AuthSignup = () => {
     const handleLogin=async(e)=>{
         e.preventDefault()
         const token=  await dispatch(LoginHandler(number,password))
-        console.log("token inside handlelogin func is",token)
         if(token){
 
            dispatch(setAuthModal())
         }
         dispatch(clearUserData())
+    }
+    const handleTestLogin=async(e)=>{
+        e.preventDefault();
+        const token= await dispatch(LoginHandler("7867345998","Rakul@123"))
+        if(token){
+
+            dispatch(setAuthModal())
+         }
+         dispatch(clearUserData())
     }
 
   return (
@@ -65,7 +72,7 @@ const AuthSignup = () => {
     </form>
     <div className='cta'>
     <div className='d-flex flex-column align-items-center test-btn'>
-    <button className='button btn-auth flex-sm-grow-1'>login with test credentials</button>
+    <button className='button btn-auth flex-sm-grow-1' onClick={handleTestLogin}>login with test credentials</button>
     </div>
     </div>
    </div>
