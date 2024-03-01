@@ -1,0 +1,24 @@
+/* Toast container */
+.toast{
+  position: fixed;
+  bottom: 1rem; /* Adjust vertical positioning */
+  left: 1rem; /* Adjust horizontal positioning */
+  min-width: 200px;
+  background-color: var(--primary-colour) !important;
+  color: var(--primary-colour) !important;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  }
+  
+  /* Toast container - show animation */
+  .toast.show {
+    opacity: 1;
+  }
+
+  .toast-header{
+    font-size: 1.5rem;
+  }

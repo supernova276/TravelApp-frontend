@@ -8,6 +8,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 let isValidEmail,isValidName,isValidPassword,isValidNumber,isValidConfirmPass;
 
 export const signupHandler= (number, name, email, password, confirmPassword) => {
+    
     return async (dispatch) => {
          isValidEmail = validateEmail(email);
          isValidName = validateName(name);
@@ -21,7 +22,7 @@ export const signupHandler= (number, name, email, password, confirmPassword) => 
             const SLUG = `/travelApp/api/v1/signup`
             const URL = BASE_URL + SLUG
 
-                const { data: { accesstoken }, status } = await axios.post(URL, {
+                const { data, status } = await axios.post(URL, {
                     name: name,
                     password: password,
                     email: email,
@@ -29,24 +30,22 @@ export const signupHandler= (number, name, email, password, confirmPassword) => 
                     userType:"CUSTOMER"
                 });
 
-                if (status === 200) {
-                    // localStorage.setItem('accessToken', accessToken);
-                    dispatch({
-                        type:"SET_TOKEN",
-                        payload:accesstoken
-                    })
-
+                if (status === 201) {
+                   
                     dispatch({
                         type:"SET_NAME",
                         payload:name
                     })
+                    return true;
                 }
             } catch (err) {
                 alert('Please check the credentials, the user might already exist');
                 console.log(err);
+                return false;
             }
         } else {
             alert("Invalid credentials");
+            return false
         }
     };
 };
@@ -56,8 +55,7 @@ export const LoginHandler=(number,password)=>{
     return async (dispatch) => {
         isValidPassword = validatePassword(password);
         isValidNumber = validateNumber(number);
-    
-       console.log(isValidPassword,isValidNumber)
+
 
        if ( isValidNumber && isValidPassword) {
            try {
@@ -65,7 +63,7 @@ export const LoginHandler=(number,password)=>{
            const SLUG = `/travelApp/api/v1/login`
            const URL = BASE_URL + SLUG
 
-               const { data: { accesstoken }, status } = await axios.post(URL, {
+               const { data: { accesstoken,name }, status } = await axios.post(URL, {
                   number:number,
                    password: password,
                });
@@ -76,6 +74,10 @@ export const LoginHandler=(number,password)=>{
                 dispatch({
                     type:"SET_TOKEN",
                     payload:accesstoken
+                })
+                dispatch({
+                    type:"SET_NAME",
+                    payload:name
                 })
 
                    return accesstoken

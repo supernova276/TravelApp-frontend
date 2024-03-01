@@ -7,6 +7,7 @@ import './Navbar.css'
 import { useState } from 'react';
 import {setSearchModal} from '../../../actions/search.actions'
 import {setAuthModal} from '../../../actions/auth.actions'
+import {setLogoutModal} from '../../../actions/auth.actions'
 
 function NavbarComponent() {
 
@@ -15,7 +16,9 @@ function NavbarComponent() {
  const destination=useSelector(state=>state.search.destination)
  const checkinDate=useSelector(state=>state.search.checkInDate)
  const checkoutDate=useSelector(state=>state.search.checkOutDate)
- const name=useSelector(state=>state.search.name)
+ const name=useSelector(state=>state.auth.name)
+ const token=useSelector(state=>state.auth.token)
+
 //  const isModalOpen=useSelector(state=>state.auth.isAuthModalOpen)
 
   const handleSearch=()=>{
@@ -23,7 +26,14 @@ function NavbarComponent() {
   }
 
   const handleAuthClick=()=>{
+    
+    if(token){
+      console.log("i have token")
+    dispatch(setLogoutModal())
+  }
+    else
     dispatch(setAuthModal())
+    
   }
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{position:"fixed", zIndex:"2", width:"100%"}}>
@@ -32,7 +42,7 @@ function NavbarComponent() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className=" d-flex justify-content-between"  style={{width:"100%"}} >
           
-      <div id="brand-heading">EzeeTravel</div>
+      <div id="brand-heading">EzeeTrip</div>
       { 
       <div className='form-container d-flex align-items-center justify-content-center cursor-pointer shadow' onClick={handleSearch}>
 

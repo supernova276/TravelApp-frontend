@@ -13,6 +13,8 @@ import { getHotelsByPropertyType } from '../../utils/property-type'
 import { getHotelsByRatings } from '../../utils/ratings'
 import {getHotelsByCancelation} from '../../utils/hotels-cancel'
 import AuthModal from '../../components/AuthModal/AuthModal'
+import LogOutModal from '../../components/logoutModal/LogOutModal'
+import Toast from '../../components/toast/Toast'
 
 const  LandingPage = () => {
 
@@ -32,6 +34,9 @@ const  LandingPage = () => {
   const rating=useSelector(state=>state.filter.rating)
   const isCancelable=useSelector(state=>state.filter.isCancelable)
   const isAuthModalOpen=useSelector(state=>state.auth.isAuthModalOpen)
+  const isLogoutModalOpen=useSelector(state=>state.auth.isLogoutModalOpen)
+  const addToast=useSelector(state=>state.auth.addToast)
+  const removeToast=useSelector(state=>state.auth.removeToast)
   const dispatch=useDispatch()
 
   const fetchMore=()=>{
@@ -88,6 +93,9 @@ const  LandingPage = () => {
         }
         {isModalOpen && <SearchStayWithDate/>}
         {isAuthModalOpen && <AuthModal/>}
+        {isLogoutModalOpen && <LogOutModal/>}
+        {removeToast && <Toast/>}
+        {addToast && <Toast/>}
     
     </div>
   )

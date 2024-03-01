@@ -2,13 +2,13 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import './auth.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setMobileNumber, setPassword,clearUserData } from '../actions/auth.actions';
+import { setMobileNumber, setPassword,clearUserData, removeToast,addToast } from '../actions/auth.actions';
 import { debounce } from '@mui/material';
 import {LoginHandler} from '../actions/authService-actions'
 import {setAuthModal} from '../actions/auth.actions'
 
 
-const AuthSignup = () => {
+const AuthLogin = () => {
 
     const dispatch=useDispatch()
 
@@ -32,17 +32,22 @@ const AuthSignup = () => {
         if(token){
 
            dispatch(setAuthModal())
+           dispatch(addToast())
         }
-        dispatch(clearUserData())
+        // dispatch(clearUserData())
     }
     const handleTestLogin=async(e)=>{
+
         e.preventDefault();
         const token= await dispatch(LoginHandler("7867345998","Rakul@123"))
         if(token){
 
             dispatch(setAuthModal())
+            dispatch(addToast())
+            dispatch(removeToast())
          }
-         dispatch(clearUserData())
+        //  dispatch(clearUserData())
+
     }
 
   return (
@@ -79,4 +84,4 @@ const AuthSignup = () => {
   )
 }
 
-export default AuthSignup
+export default AuthLogin

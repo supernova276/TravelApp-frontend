@@ -60,7 +60,7 @@ export const getHotelById = (id) => {
 
             const { data } = await axios.get(URL)
 
-            console.log("data inside siglehotel",data)
+           
             dispatch({
 
                 type: "GET_HOTEL_BY_ID",

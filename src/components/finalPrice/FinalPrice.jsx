@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./FinalPrice.css"
 import { useDispatch, useSelector } from 'react-redux'
 import DateSelector from '../DateSelector/DateSelector'
 import { setGeusts } from '../../actions/search.actions'
+import { useNavigate, useParams } from 'react-router'
 
 const FinalPrice = () => {
 
     const singleHotel=useSelector(state=>state.service.hotelById)
     const geusts=useSelector(state=>state.search.geusts)
     const dispatch=useDispatch()
+    const navigate=useNavigate()
+    const id=singleHotel._id
+    const checkinDate=useSelector(state=>state.search.checkInDate)
+    const checkoutDate=useSelector(state=>state.search.checkOutDate)
 
     const handleGeustChange=(e)=>{
          dispatch(setGeusts(e.target.value))
+    }
+
+    const handleReserveClick=()=>{
+          navigate(`/confirmBooking/${id}`)
     }
 
     const{price,rating}=singleHotel
@@ -44,7 +53,9 @@ const FinalPrice = () => {
         </div>
 
         <div className='d-flex justify-content-center'>
-            <button className='btn-reserve'>Reserve</button>
+            <button className='btn-reserve'onClick={handleReserveClick} disabled={
+                checkinDate && checkoutDate && geusts>0?false:true
+            }>Reserve</button>
         </div>
 
         <div className='price-distribution d-flex flex-column'>

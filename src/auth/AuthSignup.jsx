@@ -6,8 +6,9 @@ import { setConfirmPassword, setEmail, setMobileNumber, setName, setPassword,cle
 import {signupHandler} from '../actions/authService-actions'
 import { debounce } from '@mui/material';
 import AuthModal from '../components/AuthModal/AuthModal';
+import {setSelectedTabLogin} from '../actions/auth.actions'
 
-const AuthLogin = () => {
+const AuthSignup = () => {
 
     const dispatch=useDispatch()
 
@@ -37,11 +38,13 @@ const AuthLogin = () => {
         dispatch(setConfirmPassword(e.target.value))
     }
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault()
-        dispatch(signupHandler(number,name,email,password,confirmPassword))
+        const validSignup= await dispatch(signupHandler(number,name,email,password,confirmPassword))
+        if(validSignup){
         dispatch(clearUserData())
-        dispatch(AuthModal())
+        dispatch(setSelectedTabLogin())
+        }
     }
 
     const debouncedEmail=debounce(handleEmail,500)
@@ -115,4 +118,4 @@ const AuthLogin = () => {
   )
 }
 
-export default AuthLogin
+export default AuthSignup

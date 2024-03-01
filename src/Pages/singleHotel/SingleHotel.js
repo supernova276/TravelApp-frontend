@@ -26,7 +26,7 @@ const SingleHotel = () => {
         <HotelImag />
         <div className='d-flex '>
           <HotelDetails />
-          <FinalPrice />
+          <FinalPrice/>
         </div>
       </main>
     </div>

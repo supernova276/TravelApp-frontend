@@ -1,13 +1,16 @@
 const initalState={
     // token:null,
     isAuthModalOpen:false,
+    isLogoutModalOpen:false,
     name:"",
     number:"",
     email:"",
     password:"",
     confirmPassword:"",
     selectedTab:"login",
-    token:""
+    token:"",
+    addToast:false,
+    removeToast:true
 
 }
 
@@ -21,6 +24,11 @@ export const authReducer=(state=initalState,action)=>{
             return{
                 ...state,
                 isAuthModalOpen:!state.isAuthModalOpen
+            }
+        case "LOGOUT_MODAL":
+            return{
+                ...state,
+                isLogoutModalOpen:!state.isLogoutModalOpen
             }
 
         case "TAB_LOGIN":
@@ -67,14 +75,30 @@ export const authReducer=(state=initalState,action)=>{
                 name: "",
                 number: "",
                 email: "",
-                password: "",
-                    
+                password: "", 
+                addToast:false,
+                // removeToast:false 
                 }
 
         case "SET_TOKEN":
             return{
                 ...state,
                 token:payload
+            }
+        case "REMOVE_TOKEN":
+            return{
+                ...state,
+                token:""
+            }
+        case "ADD_TOAST":
+            return{
+                ...state,
+                addToast:true
+            }
+        case "REMOVE_TOAST":
+            return{
+                ...state,
+                 removeToast:!state.removeToast
             }
 
         default:return state

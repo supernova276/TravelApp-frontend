@@ -86,7 +86,7 @@ const singleHotel=useSelector(state=>state.service.hotelById)
 
         { houseRules &&  <div className='d-flex flex-column'>
         <p className='heading text-secondary'>what this place offers
-        <span class="material-symbols-outlined" onClick={handleToggle} style={{cursor:"pointer"}}> expand_more</span></p>
+        <span className="material-symbols-outlined" onClick={handleToggle} style={{cursor:"pointer"}}> expand_more</span></p>
         
         <div className='list'>
 
