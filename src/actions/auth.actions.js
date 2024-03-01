@@ -14,6 +14,17 @@ export const setAuthModal = () => {
 
 }
 
+export const setLogoutModal = () => {
+
+    return dispatch => {
+        dispatch({
+            type: "LOGOUT_MODAL"
+        })
+    }
+
+}
+
+
 export const setSelectedTabLogin = () => {
     return dispatch => {
         dispatch({
@@ -109,3 +120,26 @@ export const clearUserData=()=>{
         })
     }
 }
+export const removeToken=()=>{
+    return dispatch=>{
+        dispatch({
+            type:"REMOVE_TOKEN"
+        })
+    }
+}
+export const addToast=()=>{
+    return dispatch=>{
+        dispatch({
+            type:"ADD_TOAST"
+        })
+    }
+}
+export const removeToast=()=>{
+    return dispatch=>{
+        dispatch({
+            type:"REMOVE_TOAST"
+        })
+    }
+}
+
+

@@ -1,0 +1,25 @@
+.logout-modal-container{
+    background-color: var(--accent-colour);
+    width:30rem;
+    padding:1rem;
+    position: absolute;
+    z-index:10;
+    right:1rem;
+    top:4rem;
+    
+}
+.logout-modal-btn{
+    display: inline-block;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    cursor:pointer;
+    /* color: var(--accent-colour); */
+}
+/* .button{
+    background: none;
+    border: none;
+} */
+.icon{
+    font-size:1.5rem;
+    font-weight: 500;
+}
